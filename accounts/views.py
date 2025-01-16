@@ -47,8 +47,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request,"你已成功登入")
-            #return redirect('profile')
-            return redirect('admin/password_change')
+            return redirect('profile')
         else:
             messages.error(request,"錯誤輸入")
             return redirect('login')
