@@ -1,0 +1,58 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} 
+Login
+{% endblock title %} 
+{% block content %}
+{% include 'partials/_alert.html' %}
+
+
+<!-- login  -->
+<section id="login" class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4><i class="fas fa-sign-in-alt"></i>登入</h4>
+          </div>
+          <div class="card-body">
+
+            <!-- Login Form -->
+            <form action={% url 'login' %} method = "POST">
+              {%csrf_token%}
+              <!-- from user db -->
+              <!-- username input -->
+              <div class="form-group">
+                <label for="username">使用者名稱</label>
+                <input
+                  type="text"
+                  name="username"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <!-- password input -->
+              <div class="form-group">
+                <label for="password">密碼</label>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <input
+                type="submit"
+                value="登入"
+                class="btn btn-secondary btn-block"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

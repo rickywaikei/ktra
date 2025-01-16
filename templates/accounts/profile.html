@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block title %} Profile {% endblock title %}
+{% block content %} 
+{% include 'partials/_alert.html' %}
+{% if user_bookings %}
+<div class="container" style="padding:100px;">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">使用者</th>
+        <th scope="col">服務</th>
+        <th scope="col">費用</th>
+        <th scope="col">已預約名額</th>
+        <th scope="col">總共費用</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for b in user_bookings %}
+    <tr>
+      <th scope="row">{{ b.user__username }}</th>
+      <td>{{ b.service__title }}</td>
+      <td>{{ b.service__fee }}</td>
+      <td>{{ b.count }}</td>
+      <td>{{ b.total_fee }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+</div>
+{% else %}
+
+
+<h3 class = "text-center py-4">
+  您暫無預訂記錄
+</h3>
+{% endif %} {% endblock content %}
