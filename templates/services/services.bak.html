@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load ktra_filters %}
-{% block title %} | {{service_type | get_service_label}} {% endblock %}
+{% block title %} | {{service_type | title}} {% endblock %}
 {% block content %}
+{% load ktra_filters %}
 
 <style>
   body {
@@ -126,102 +125,7 @@
   .rising-text[style*="animation-delay"] {
     opacity: 0;
   }
-
-  .search-button {
-    background-color: transparent;  /* Make the background transparent */
-    border: none;                   /* Remove default border */
-    padding: 0;                     /* Remove default padding */
-    cursor: pointer;                /* Change cursor to pointer */
-}
-
-.search-icon {
-    width: 30px;                    /* Set width of the search icon */
-    height: 40px;                   /* Set height of the search icon */
-    transition: transform 0.3s;    /* Add transition for scaling effect */
-}
-
-.search-button:hover .search-icon {
-    transform: scale(1.2);          /* Scale the icon on hover */
-}
-
-/* Optional: Add a simple animation */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.search-button:focus .search-icon {
-    animation: pulse 1s infinite;  /* Add pulse animation on focus */
-}
 </style>
-
-<!-- Search section -->
-<section id="search_form">  
-  <div class="container text-center">
-    <div class="service-search p-3">
-      <div class="search">
-        <form action="{% url 's-search' %}" method="GET">
-          <div class="form-row">
-            <div class="col-md-3 mb-2">
-              <label class="sr-only">內容</label>
-              <input
-                type="text"
-                name="keywords"
-                class="form-control"
-                placeholder="內容 (音樂, 瑜珈, etc)"
-                value= "{{ values.keywords }}"
-              />
-            </div>
-            <div class="col-md-2 mb-2">
-              <label class="sr-only">title</label>
-              <input
-                type="text"
-                name="title"
-                class="form-control"
-                placeholder="標題"
-                value="{{ values.title }}"
-              />
-            </div>
-            <div class="col-md-2 mb-2">
-                <label class="sr-only">service_type</label>
-                <select name="service_type" class="form-control">
-                  <option selected="true" disabled="disabled">
-                    類型(全部)
-                  </option>
-                  {% for key,value in service_type_choices %}
-                  <option value='{{ key }}' {% if values.service_type == key %} selected {% endif %}>{{ value }}</option>
-                  {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-2 mb-2">
-              <label class="sr-only">service_date</label>
-                <select name="service_date" class="form-control">
-                  <option selected="true" disabled="disabled">
-                    服務日期(全部)
-                  </option>
-                  {% for key,value in service_date_choices %}
-                  <option value='{{ key }}' {% if values.service_date == key %} selected {% endif %}>{{ value }}</option>
-                  {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-1 mb-2">
-              <button class="btn btn-primary btn-block search-button" type="submit">
-                  <img src="{% static 'img/search.svg' %}" alt="Search" class="search-icon" />
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Showcase Section -->
 <section id="showcase-inner" class="text-white py-5">

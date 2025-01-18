@@ -1,3 +1,4 @@
+# events/views.py
 from django.shortcuts import render, get_object_or_404
 from .models import Event
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -14,7 +15,7 @@ def events(request, event_type=None):
 
     context = {
         'publish_date_choices': publish_date_choices,
-        'event_type_choices': event_type_choices,  # Pass event type choices to the template
+        'event_type_choices': event_type_choices,
         'events': events_queryset,
         'event_type': event_type,
     }

@@ -1,148 +1,146 @@
-<!-- templates/events/events.html -->
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
 {% load ktra_filters %}
-{% block title %} | {{ event_type|get_event_label }} {% endblock %} 
+{% block title %} | 服務搜尋 {% endblock %}
 {% block content %}
 
 <style>
-  /* Modern Card Design */
-  .card.listing-preview {
-    border: none;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card.listing-preview:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Enhanced Title Styling */
-  .card-title {
-    padding: 1rem;
-    margin: 0;
-    background: linear-gradient(45deg, #F79880, #DFAF67, #F7B583);
-    color: white;
-    font-size: 1.25rem;
-    font-weight: bold;
-    text-align: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-
-  .card-title h4 {
-    margin: 0;
-    color: white !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Pagination Styling */
-  .pagination .page-item.active .page-link {
-    background-color: #6a11cb;
-    border-color: #6a11cb;
-  }
-
-  .pagination .page-link {
-    color: #6a11cb;
-  }
-
-  .pagination .page-link:hover {
-    background-color: #f7e7e3;
-    color: #6a11cb;
-  }
-
-</style>
-
-<script>
-let page = 1;
-const eventsContainer = document.getElementById('events');
-
-window.addEventListener('scroll', () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-    page++;
-    fetch(`/events/?page=${page}`)
-      .then(response => response.text())
-      .then(html => {
-        eventsContainer.insertAdjacentHTML('beforeend', html);
-      });
-  }
-});
-
-</script>
-
-
-<!-- Add this style block at the top of your file -->
-<style>
-  @keyframes textRise {
-    0% {
-      transform: translateY(50px);
+    /* Modern Card Design */
+    .card.listing-preview {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .card.listing-preview:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+  
+    /* Enhanced Title Styling */
+    .card-title {
+      padding: 1rem;
+      margin: 0;
+      background: linear-gradient(45deg, #F79880, #DFAF67, #F7B583);
+      color: white;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-align: center;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  
+    .card-title h4 {
+      margin: 0;
+      color: white !important;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+    }
+  
+    /* Pagination Styling */
+    .pagination .page-item.active .page-link {
+      background-color: #6a11cb;
+      border-color: #6a11cb;
+    }
+  
+    .pagination .page-link {
+      color: #6a11cb;
+    }
+  
+    .pagination .page-link:hover {
+      background-color: #f7e7e3;
+      color: #6a11cb;
+    }
+  
+    .search-button {
+        background-color: transparent;  /* Make the background transparent */
+        border: none;                   /* Remove default border */
+        padding: 0;                     /* Remove default padding */
+        cursor: pointer;                /* Change cursor to pointer */
+    }
+    
+    .search-icon {
+        width: 30px;                    /* Set width of the search icon */
+        height: 40px;                   /* Set height of the search icon */
+        transition: transform 0.3s;    /* Add transition for scaling effect */
+    }
+    
+    .search-button:hover .search-icon {
+        transform: scale(1.2);          /* Scale the icon on hover */
+    }
+    
+    /* Optional: Add a simple animation */
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    .search-button:focus .search-icon {
+        animation: pulse 1s infinite;  /* Add pulse animation on focus */
+    }
+  </style>
+  
+  <script>
+  let page = 1;
+  const servicesContainer = document.getElementById('services');
+  
+  window.addserviceListener('scroll', () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+      page++;
+      fetch(`/services/?page=${page}`)
+        .then(response => response.text())
+        .then(html => {
+          servicesContainer.insertAdjacentHTML('beforeend', html);
+        });
+    }
+  });
+  
+  </script>
+  
+  
+  <!-- Add this style block at the top of your file -->
+  <style>
+    @keyframes textRise {
+      0% {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .rising-text {
+      animation: textRise 1.5s ease-out forwards;
+    }
+  
+    /* Add this to hide the text initially */
+    .rising-text[style*="animation-delay"] {
       opacity: 0;
     }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
+    
+    #showcase-inner.sunrise-effect {
+      /* position: relative;
+      overflow: hidden;
+      animation: sunrise 10s infinite; */
+      background: linear-gradient(to right, #6a11cb, #2575fc);
     }
-  }
-  
-  .rising-text {
-    animation: textRise 1.5s ease-out forwards;
-  }
-
-  /* Add this to hide the text initially */
-  .rising-text[style*="animation-delay"] {
-    opacity: 0;
-  }
-  
-  #showcase-inner.sunrise-effect {
-    /* position: relative;
-    overflow: hidden;
-    animation: sunrise 10s infinite; */
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-  }
-
-  .search-button {
-    background-color: transparent;  /* Make the background transparent */
-    border: none;                   /* Remove default border */
-    padding: 0;                     /* Remove default padding */
-    cursor: pointer;                /* Change cursor to pointer */
-}
-
-.search-icon {
-    width: 30px;                    /* Set width of the search icon */
-    height: 40px;                   /* Set height of the search icon */
-    transition: transform 0.3s;    /* Add transition for scaling effect */
-}
-
-.search-button:hover .search-icon {
-    transform: scale(1.2);          /* Scale the icon on hover */
-}
-
-/* Optional: Add a simple animation */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.search-button:focus .search-icon {
-    animation: pulse 1s infinite;  /* Add pulse animation on focus */
-}
-</style>
+  </style>
 
 <!-- Search section -->
 <section id="search_form">  
   <div class="container text-center">
-    <div class="event-search p-3">
+    <div class="service-search p-3">
       <div class="search">
-        <form action="{% url 'e-search' %}" method="GET">
+        <form action="{% url 's-search' %}" method="GET">
           <div class="form-row">
             <div class="col-md-3 mb-2">
               <label class="sr-only">內容</label>
@@ -165,24 +163,24 @@ window.addEventListener('scroll', () => {
               />
             </div>
             <div class="col-md-2 mb-2">
-                <label class="sr-only">event_type</label>
-                <select name="event_type" class="form-control">
+                <label class="sr-only">service_type</label>
+                <select name="service_type" class="form-control">
                   <option selected="true" disabled="disabled">
                     類型(全部)
                   </option>
-                  {% for key,value in event_type_choices %}
-                  <option value='{{ key }}' {% if values.event_type == key %} selected {% endif %}>{{ value }}</option>
-                  {% endfor %}
+                  {% for key,value in service_type_choices %}
+                  <option value='{{ key }}' {% if values.service_type == key %} selected {% endif %}>{{ value }}</option>
+                {% endfor %}
                 </select>
             </div>
             <div class="col-md-2 mb-2">
-                <label class="sr-only">publish_date</label>
-                <select name="publish_date" class="form-control">
+              <label class="sr-only">service_date</label>
+                <select name="service_date" class="form-control">
                   <option selected="true" disabled="disabled">
-                    發布日期(全部)
+                    服務日期(全部)
                   </option>
-                  {% for key,value in publish_date_choices %}
-                  <option value='{{ key }}' {% if values.publish_date == key %} selected {% endif %}>{{ value }}</option>
+                  {% for key,value in service_date_choices %}
+                  <option value='{{ key }}' {% if values.service_date == key %} selected {% endif %}>{{ value }}</option>
                   {% endfor %}
                 </select>
             </div>
@@ -204,8 +202,8 @@ window.addEventListener('scroll', () => {
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4 rising-text">{{ event_type|get_event_label }}新聞</h1>
-          <p class="lead rising-text" style="animation-delay: 0.5s;">最新動態與活動資訊</p>
+          <h1 class="display-4 rising-text">{{ service_type|get_service_label }}服務搜尋</h1>
+          <p class="lead rising-text" style="animation-delay: 0.5s;">最新服務資訊</p>
         </div>
       </div>
     </div>
@@ -213,8 +211,8 @@ window.addEventListener('scroll', () => {
   
 
 
-<!-- Events Section -->
-<!-- <section id="events" class="py-5">
+<!-- services Section -->
+<!-- <section id="services" class="py-5">
   <div class="container"> -->
     <!-- Filter and Sort Options -->
     <!-- <div class="row mb-4">
@@ -237,7 +235,7 @@ window.addEventListener('scroll', () => {
 
 <style>
   /* Add these new styles */
-  .events-carousel {
+  .services-carousel {
   position: relative;
   overflow: hidden;
   padding: 20px;
@@ -305,39 +303,39 @@ window.addEventListener('scroll', () => {
   </style>
 
 
-<!-- Replace the existing Events Grid with this -->
-<section id="events" class="py-5">
+<!-- Replace the existing services Grid with this -->
+<section id="services" class="py-5">
   <div class="container">
-    <div class="events-carousel">
+    <div class="services-carousel">
       <div class="carousel-nav carousel-prev">&lt;</div>
       <div class="carousel-nav carousel-next">&gt;</div>
       <div class="carousel-container">
 
-        {% if events %}
-          {% for event in events %}
+        {% if services %}
+          {% for service in services %}
             <div class="carousel-item">
               <div class="card listing-preview">
                 <div class="card-title">
-                  <h4>{{ event.title|title }}</h4>
+                  <h4>{{ service.title|title }}</h4>
                 </div>
-                {% if event.photo_main %}
-                  <img class="card-img-top" src="{{ event.photo_main.url }}" alt="{{ event.title }}" loading="lazy">
+                {% if service.photo_main %}
+                  <img class="card-img-top" src="{{ service.photo_main.url }}" alt="{{ service.title }}" loading="lazy">
                 {% endif %}
                 <div class="card-body">
                   <hr />
                   <div class="row text-secondary pb-2">
                     <div class="col-12">
-                      <i class="fas fa-newspaper"></i> {{ event.content|truncatechars:100 }}
+                      <i class="fas fa-newspaper"></i> {{ service.description|truncatechars:100 }}
                     </div>
                   </div>
                   <hr />
                   <div class="row text-secondary pb-2">
                     <div class="col-12">
-                      <i class="fas fa-clock"></i> {{ event.publish_date|chinese_date }}
+                      <i class="fas fa-clock"></i> {{ service.service_date|chinese_date }}
                     </div>
                   </div>
                   <hr />
-                  <a href="{% url 'event_detail' event.id %}" class="btn btn-primary btn-block">詳細資訊</a>
+                  <a href="{% url 'service' service.id %}" class="btn btn-primary btn-block">詳細資訊</a>
                 </div>
               </div>
             </div>
@@ -350,7 +348,7 @@ window.addEventListener('scroll', () => {
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addserviceListener('DOMContentLoaded', function() {
     const container = document.querySelector('.carousel-container');
     const originalItems = Array.from(document.querySelectorAll('.carousel-item'));
     const prevBtn = document.querySelector('.carousel-prev');
@@ -413,21 +411,21 @@ window.addEventListener('scroll', () => {
     }
 
     // Button controls
-    prevBtn.addEventListener('mousedown', () => {
+    prevBtn.addserviceListener('mousedown', () => {
       isAnimating = true;
       direction = -1;
       if (autoScrollInterval) clearInterval(autoScrollInterval);
       autoScrollInterval = setInterval(() => moveCarousel(-2), 20);
     });
 
-    nextBtn.addEventListener('mousedown', () => {
+    nextBtn.addserviceListener('mousedown', () => {
       isAnimating = true;
       direction = 1;
       if (autoScrollInterval) clearInterval(autoScrollInterval);
       autoScrollInterval = setInterval(() => moveCarousel(2), 20);
     });
 
-    document.addEventListener('mouseup', () => {
+    document.addserviceListener('mouseup', () => {
       if (isAnimating) {
         isAnimating = false;
         if (autoScrollInterval) clearInterval(autoScrollInterval);
@@ -436,7 +434,7 @@ window.addEventListener('scroll', () => {
     });
 
     // Hover effects
-    prevBtn.addEventListener('mouseenter', () => {
+    prevBtn.addserviceListener('mouseenter', () => {
       if (!isAnimating) {
         direction = -1;
         if (autoScrollInterval) clearInterval(autoScrollInterval);
@@ -444,7 +442,7 @@ window.addEventListener('scroll', () => {
       }
     });
 
-    nextBtn.addEventListener('mouseenter', () => {
+    nextBtn.addserviceListener('mouseenter', () => {
       if (!isAnimating) {
         direction = 1;
         if (autoScrollInterval) clearInterval(autoScrollInterval);
@@ -452,7 +450,7 @@ window.addEventListener('scroll', () => {
       }
     });
 
-    prevBtn.addEventListener('mouseleave', () => {
+    prevBtn.addserviceListener('mouseleave', () => {
       if (!isAnimating) {
         direction = 1;
         if (autoScrollInterval) clearInterval(autoScrollInterval);
@@ -460,7 +458,7 @@ window.addEventListener('scroll', () => {
       }
     });
 
-    nextBtn.addEventListener('mouseleave', () => {
+    nextBtn.addserviceListener('mouseleave', () => {
       if (!isAnimating) {
         direction = 1;
         if (autoScrollInterval) clearInterval(autoScrollInterval);
