@@ -1,202 +1,200 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
 {% load ktra_filters %}
-
-{% block title %} | {{ event_type|get_event_label }} {% endblock %} 
+{% block title %} | 新聞搜尋 {% endblock %}
 {% block content %}
 
 <style>
-  /* Modern Card Design */
-  .card.listing-preview {
-    border: none;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card.listing-preview:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Enhanced Title Styling */
-  .card-title {
-    padding: 1rem;
-    margin: 0;
-    background: linear-gradient(45deg, #F79880, #DFAF67, #F7B583);
-    color: white;
-    font-size: 1.25rem;
-    font-weight: bold;
-    text-align: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-
-  .card-title h4 {
-    margin: 0;
-    color: white !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Pagination Styling */
-  .pagination .page-item.active .page-link {
-    background-color: #6a11cb;
-    border-color: #6a11cb;
-  }
-
-  .pagination .page-link {
-    color: #6a11cb;
-  }
-
-  .pagination .page-link:hover {
-    background-color: #f7e7e3;
-    color: #6a11cb;
-  }
-
-</style>
-
-<script>
-let page = 1;
-const eventsContainer = document.getElementById('events');
-
-window.addEventListener('scroll', () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-    page++;
-    fetch(`/events/?page=${page}`)
-      .then(response => response.text())
-      .then(html => {
-        eventsContainer.insertAdjacentHTML('beforeend', html);
-      });
-  }
-});
-
-</script>
-
-
-<!-- Add this style block at the top of your file -->
-<style>
-  @keyframes textRise {
-    0% {
-      transform: translateY(50px);
+    /* Modern Card Design */
+    .card.listing-preview {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .card.listing-preview:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+  
+    /* Enhanced Title Styling */
+    .card-title {
+      padding: 1rem;
+      margin: 0;
+      background: linear-gradient(45deg, #F79880, #DFAF67, #F7B583);
+      color: white;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-align: center;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  
+    .card-title h4 {
+      margin: 0;
+      color: white !important;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+    }
+  
+    /* Pagination Styling */
+    .pagination .page-item.active .page-link {
+      background-color: #6a11cb;
+      border-color: #6a11cb;
+    }
+  
+    .pagination .page-link {
+      color: #6a11cb;
+    }
+  
+    .pagination .page-link:hover {
+      background-color: #f7e7e3;
+      color: #6a11cb;
+    }
+  
+    .search-button {
+        background-color: transparent;  /* Make the background transparent */
+        border: none;                   /* Remove default border */
+        padding: 0;                     /* Remove default padding */
+        cursor: pointer;                /* Change cursor to pointer */
+    }
+    
+    .search-icon {
+        width: 30px;                    /* Set width of the search icon */
+        height: 40px;                   /* Set height of the search icon */
+        transition: transform 0.3s;    /* Add transition for scaling effect */
+    }
+    
+    .search-button:hover .search-icon {
+        transform: scale(1.2);          /* Scale the icon on hover */
+    }
+    
+    /* Optional: Add a simple animation */
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    .search-button:focus .search-icon {
+        animation: pulse 1s infinite;  /* Add pulse animation on focus */
+    }
+  </style>
+  
+  <script>
+  let page = 1;
+  const eventsContainer = document.getElementById('events');
+  
+  window.addEventListener('scroll', () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+      page++;
+      fetch(`/events/?page=${page}`)
+        .then(response => response.text())
+        .then(html => {
+          eventsContainer.insertAdjacentHTML('beforeend', html);
+        });
+    }
+  });
+  
+  </script>
+  
+  
+  <!-- Add this style block at the top of your file -->
+  <style>
+    @keyframes textRise {
+      0% {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .rising-text {
+      animation: textRise 1.5s ease-out forwards;
+    }
+  
+    /* Add this to hide the text initially */
+    .rising-text[style*="animation-delay"] {
       opacity: 0;
     }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
+    
+    #showcase-inner.sunrise-effect {
+      /* position: relative;
+      overflow: hidden;
+      animation: sunrise 10s infinite; */
+      background: linear-gradient(to right, #6a11cb, #2575fc);
     }
-  }
-  
-  .rising-text {
-    animation: textRise 1.5s ease-out forwards;
-  }
-
-  /* Add this to hide the text initially */
-  .rising-text[style*="animation-delay"] {
-    opacity: 0;
-  }
-  
-  #showcase-inner.sunrise-effect {
-    /* position: relative;
-    overflow: hidden;
-    animation: sunrise 10s infinite; */
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-  }
-
-  .search-button {
-    background-color: transparent;  /* Make the background transparent */
-    border: none;                   /* Remove default border */
-    padding: 0;                     /* Remove default padding */
-    cursor: pointer;                /* Change cursor to pointer */
-}
-
-.search-icon {
-    width: 30px;                    /* Set width of the search icon */
-    height: 40px;                   /* Set height of the search icon */
-    transition: transform 0.3s;    /* Add transition for scaling effect */
-}
-
-.search-button:hover .search-icon {
-    transform: scale(1.2);          /* Scale the icon on hover */
-}
-
-/* Optional: Add a simple animation */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.search-button:focus .search-icon {
-    animation: pulse 1s infinite;  /* Add pulse animation on focus */
-}
-</style>
+  </style>
 
 <!-- Search section -->
 <section id="search_form">  
-  <div class="container text-center">
-    <div class="event-search p-3">
-      <div class="search">
-        <form action="{% url 'search' %}" method="GET">
-          <div class="form-row">
-            <div class="col-md-3 mb-2">
-              <label class="sr-only">內容</label>
-              <input
-                type="text"
-                name="keywords"
-                class="form-control"
-                placeholder="內容 (音樂, 瑜珈, etc)"
-                value= "{{ values.keywords }}"
-              />
+    <div class="container text-center">
+      <div class="event-search p-3">
+        <div class="search">
+          <form action="{% url 'search' %}" method="GET">
+            <div class="form-row">
+              <div class="col-md-3 mb-2">
+                <label class="sr-only">內容</label>
+                <input
+                  type="text"
+                  name="keywords"
+                  class="form-control"
+                  placeholder="內容 (音樂, 瑜珈, etc)"
+                  value= "{{ values.keywords }}"
+                />
+              </div>
+              <div class="col-md-2 mb-2">
+                <label class="sr-only">title</label>
+                <input
+                  type="text"
+                  name="title"
+                  class="form-control"
+                  placeholder="標題"
+                  value="{{ values.title }}"
+                />
+              </div>
+              <div class="col-md-2 mb-2">
+                  <label class="sr-only">event_type</label>
+                  <select name="event_type" class="form-control">
+                    <option selected="true" disabled="disabled">
+                      類型(全部)
+                    </option>
+                    {% for key,value in event_type_choices %}
+                    <option value='{{ key }}' {% if values.event_type == key %} selected {% endif %}>{{ value }}</option>
+                  {% endfor %}
+                  </select>
+              </div>
+              <div class="col-md-2 mb-2">
+                  <label class="sr-only">publish_date</label>
+                  <select name="publish_date" class="form-control">
+                    <option selected="true" disabled="disabled">
+                      發布日期(全部)
+                    </option>
+                    {% for key,value in publish_date_choices %}
+                    <option value='{{ key }}' {% if values.publish_date == key %} selected {% endif %}>{{ value }}</option>
+                  {% endfor %}
+                  </select>
+              </div>
+              <div class="col-md-1 mb-2">
+                <button class="btn btn-primary btn-block search-button" type="submit">
+                    <img src="{% static 'img/search.svg' %}" alt="Search" class="search-icon" />
+                </button>
+              </div>
             </div>
-            <div class="col-md-2 mb-2">
-              <label class="sr-only">title</label>
-              <input
-                type="text"
-                name="title"
-                class="form-control"
-                placeholder="標題"
-                value="{{ values.title }}"
-              />
-            </div>
-            <div class="col-md-2 mb-2">
-                <label class="sr-only">event_type</label>
-                <select name="event_type" class="form-control">
-                  <option selected="true" disabled="disabled">
-                    類型(全部)
-                  </option>
-                  {% for key,value in event_type_choices %}
-                  <option value='{{ key }}' {% if values.event_type == key %} selected {% endif %}>{{ value }}</option>
-                {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-2 mb-2">
-                <label class="sr-only">publish_date</label>
-                <select name="publish_date" class="form-control">
-                  <option selected="true" disabled="disabled">
-                    發布日期(全部)
-                  </option>
-                  {% for key,value in publish_date_choices %}
-                  <option value='{{ key }}' {% if values.publish_date == key %} selected {% endif %}>{{ value }}</option>
-                {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-1 mb-2">
-              <button class="btn btn-primary btn-block search-button" type="submit">
-                  <img src="{% static 'img/search.svg' %}" alt="Search" class="search-icon" />
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- showcase section -->
   <section id="showcase-inner" class="text-white py-5 sunrise-effect">
@@ -204,7 +202,7 @@ window.addEventListener('scroll', () => {
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4 rising-text">{{ event_type|get_event_label }}新聞</h1>
+          <h1 class="display-4 rising-text">{{ event_type|get_event_label }}新聞搜尋</h1>
           <p class="lead rising-text" style="animation-delay: 0.5s;">最新動態與活動資訊</p>
         </div>
       </div>

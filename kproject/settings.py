@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'ec2-54-79-214-217.ap-southeast-2.compute.amazonaws.com',
+    'ktra.mooo.com',
+    '192.168.195.11',
     '127.0.0.1',
     'localhost',
 ]
