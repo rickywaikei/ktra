@@ -84,31 +84,32 @@
             </div>
           </div>
         </li>
-        <li class="nav-item">
-          <a 
-            class="btn btn-secondary" 
-            href="{% url 'donation' %}" 
-            role="button">捐助
+        <li class="nav-item mr-3">
+          <a class="nav-link" href="{% url 'donation' %}">
+            <i class="fa-solid fa-hand-holding-heart"></i> 捐款
+          </a>
+        </li>
+
+        <!-- Add font size controls here -->
+        <li class="nav-item mr-3">
+          <button id="standardFont" class="nav-link btn">
+            <i class="fas fa-text-size"></i> A
+          </button>
+        </li>
+        <li class="nav-item mr-3">
+          <button id="largeFont" class="nav-link btn">
+            <i class="fas fa-text-size"></i> A+
+          </button>
+        </li>
+
+        <!-- Dashboard link -->
+        <li class="nav-item mr-3">
+          <a class="nav-link" href="{% url 'profile' %}">
+            <i class="fas fa-user-circle"></i> Dashboard
           </a>
         </li>
       </ul>
-
-
-      <!-- Add font size controls here -->
-      <ul class="navbar-nav d-flex justify-content-end align-items-center" style="font-size: 1.2rem;">
-        <li class="nav-item mr-3" style="color:white;">
-          <button id="standardFont" class="nav-link btn btn-secondary">
-            <i class="fas fa-text-size"></i> 中字
-          </button>
-        </li>
-        <li class="nav-item mr-3" style="color:white;">
-          <button id="largeFont" class="nav-link btn btn-secondary">
-            <i class="fas fa-text-size"></i> 大字
-          </button>
-        </li>     
-      </ul>
       
-
       <!-- USER LOGINOUT RESGISTER DASHBD -->
       <ul class="navbar-nav d-flex justify-content-end align-items-center" style="font-size: 1.2rem;">
         {%if user.is_authenticated %}

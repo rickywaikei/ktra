@@ -1,8 +1,8 @@
-# https://github.com/rickywaikei/helpandoffer/blob/main/README.md
+# https://github.com/rickywaikei/ktra/blob/main/README.md
 
 Demo site: http://ktra.mooo.com
 
-Deployment: https://hub.docker.com/repository/docker/rickychan/ktra
+AWS: http://ec2-3-27-71-24.ap-southeast-2.compute.amazonaws.com:8000/
 
 Developers: (2) Kim Chan (11) Ricky Chan (13) Alex Leung (18) Sage Chau
 
