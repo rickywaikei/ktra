@@ -1,8 +1,6 @@
 # https://github.com/rickywaikei/ktra/blob/main/README.md
 
-Demo site: https://ktra.mooo.com or https://hkktra.mooo.com
-
-AWS: http://ec2-3-27-71-24.ap-southeast-2.compute.amazonaws.com:8000/
+Demo AWS site: https://ktra.mooo.com or https://hkktra.mooo.com
 
 Developers: (2) Kim Chan (11) Ricky Chan (13) Alex Leung (18) Sage Chau
 
@@ -28,4 +26,3 @@ git clone https://github.com/rickywaikei/ktra.git .
 
 3. Start the app with the following command (if you are not using docker-compose)
     python manage.py runserver 0.0.0.0:8000
-
