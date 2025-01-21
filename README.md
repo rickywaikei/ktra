@@ -1,6 +1,6 @@
 # https://github.com/rickywaikei/ktra/blob/main/README.md
 
-Demo AWS site: https://ktra.mooo.com or https://hkktra.mooo.com
+Demo AWS site: https://ktra.mooo.com
 
 Developers: (2) Kim Chan (11) Ricky Chan (13) Alex Leung (18) Sage Chau
 
