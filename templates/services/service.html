@@ -1,14 +1,55 @@
 {% extends "base.html" %} {% load ktra_filters %}{% block title %} | {{service_type | title}} {% endblock %} {% block content %}
 {% include 'partials/_alert.html' %}
 
+<!-- Inner showcase Improvement Styles -->
 <style>
-  /* Showcase Section Styling */
   #showcase-inner {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    color: white;
-    padding: 3rem 0;
+    position: relative;
+    padding: 1rem 0;
+    background: linear-gradient(135deg, #F79880 0%, #DFAF67 50%, #F7B583 100%);
+    overflow: hidden;
   }
 
+  #showcase-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #showcase-inner .display-5 {
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+  }
+
+  #showcase-inner .lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    letter-spacing: 1px;
+  }
+
+  .rising-text {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<!-- Inner showcase Sunrise effect -->
+<style>
   @keyframes textRise {
     0% {
       transform: translateY(50px);
@@ -19,10 +60,92 @@
       opacity: 1;
     }
   }
-
+  
   .rising-text {
-    animation: textRise 1s ease-out forwards;
+    animation: textRise 1.5s ease-out forwards;
   }
+
+  /* Add this to hide the text initially */
+  .rising-text[style*="animation-delay"] {
+    opacity: 0;
+  }
+  
+  #showcase-inner.sunrise-effect {
+    /* position: relative;
+    overflow: hidden;
+    animation: sunrise 10s infinite; */
+    /* background: linear-gradient(to right, #6a11cb, #2575fc); */
+  }
+
+  .search-button {
+    background-color: transparent;  /* Make the background transparent */
+    border: none;                   /* Remove default border */
+    padding: 4px;                     /* Remove default padding */
+    cursor: pointer;                /* Change cursor to pointer */
+  }
+
+  .search-icon {
+    width: 21px;                    /* Set width of the search icon */
+    height: 28px;                   /* Set height of the search icon */
+    transition: transform 0.3s;    /* Add transition for scaling effect */
+  }
+
+  .search-button:hover .search-icon {
+    transform: scale(1.2);          /* Scale the icon on hover */
+  }
+
+  /* Optional: Add a simple animation */
+  @keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+  }
+
+  .search-button:focus .search-icon {
+    animation: pulse 1s infinite;  /* Add pulse animation on focus */
+  }
+</style>
+
+<!-- general styles -->
+<style>
+  /* Modern Card Design */
+  .card.listing-preview {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card.listing-preview:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Enhanced Title Styling */
+  .card-title {
+    padding: 1rem;
+    margin: 0;
+    background: linear-gradient(45deg, #F79880, #DFAF67, #F7B583);
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .card-title h4 {
+    margin: 0;
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  }
+
 
   .slideshow-container {
     position: relative;
@@ -100,24 +223,61 @@
     font-size: 14px;
   }
 
-  .enroll-button {
-    background: linear-gradient(45deg, #F79880, #DFAF67);
-    color: white;
-    border: none;
-    padding: 10px 30px;
-    border-radius: 25px;
-    font-weight: bold;
-    transition: transform 0.3s, box-shadow 0.3s;
-    margin-top: 20px;
+  /* Modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1051;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
     width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
   }
 
-  .enroll-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    color: white;
+  .modal-content {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    max-width: 1200px;
+  }
+
+  .mySlides {
+    display: none;
+    text-align: center;
+  }
+
+  .mySlides img {
+    max-height: 80vh;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .close {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    color: #f1f1f1;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
   }
 </style>
+
+<!-- Showcase Section -->
+<section id="showcase-inner" class="text-white py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-5 rising-text">{{ service.title | title }}</h1>
+        <!-- <p class="lead rising-text" style="animation-delay: 0.5s;">我們的專業服務</p> -->
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- detail descriptions style -->
 <style>
@@ -132,7 +292,7 @@
     transform: translateY(-5px);
   }
   
-  .service-description {
+  .service-description {html,css,javascript,json
     line-height: 1.6;
     color: #4a4a4a;
   }
@@ -181,20 +341,8 @@
     font-size: 1.5rem;
   }
 </style>
-  
-  
 
-<!-- Showcase -->
-<section id="showcase-inner" class="text-white">
-  <div class="container">
-    <div class="row text-center">
-      <div class="col-md-12">
-        <h1 class="rising-text">{{ service.title | title }}</h1>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- Service Details -->
 <section id="service" class="py-4">
   <div class="container">
     <a href="{% url 'services' service.service_type %}" class="btn btn-light mb-4">返回服務</a>
@@ -242,35 +390,32 @@
       </div>
 
       <!-- Photo Gallery -->
-      <div class="col-lg-7 col-sm-12 mb-4">
-        <div class="slideshow-container">
-          {% if service.photo_1 %}
-          <div class="slide active" onclick="openModal();currentSlide(1)">
-            <img src="{{ service.photo_1.url }}" alt="Photo 1">
-          </div>
-          {% endif %}
-          {% if service.photo_2 %}
-          <div class="slide" onclick="openModal();currentSlide(2)">
-            <img src="{{ service.photo_2.url }}" alt="Photo 2">
-          </div>
-          {% endif %}
-          {% if service.photo_3 %}
-          <div class="slide" onclick="openModal();currentSlide(3)">
-            <img src="{{ service.photo_3.url }}" alt="Photo 3">
-          </div>
-          {% endif %}
-          {% if service.photo_4 %}
-          <div class="slide" onclick="openModal();currentSlide(4)">
-            <img src="{{ service.photo_4.url }}" alt="Photo 4">
-          </div>
-          {% endif %}
-          
-          <div class="slide-nav slide-prev" onclick="changeSlide(-1)"><</div>
-          <div class="slide-nav slide-next" onclick="changeSlide(1)">></div>
-          <div class="slide-counter"><span id="currentSlideNum">1</span> / <span id="totalSlides">4</span></div>
-        </div>
+    <div class="slideshow-container">
+      {% if service.photo_1 %}
+      <div class="slide active" onclick="openModal();currentSlide(1)">
+        <img src="{{ service.photo_1.url }}" alt="Photo 1">
       </div>
-
+      {% endif %}
+      {% if service.photo_2 %}
+      <div class="slide" onclick="openModal();currentSlide(2)">
+        <img src="{{ service.photo_2.url }}" alt="Photo 2">
+      </div>
+      {% endif %}
+      {% if service.photo_3 %}
+      <div class="slide" onclick="openModal();currentSlide(3)">
+        <img src="{{ service.photo_3.url }}" alt="Photo 3">
+      </div>
+      {% endif %}
+      {% if service.photo_4 %}
+      <div class="slide" onclick="openModal();currentSlide(4)">
+        <img src="{{ service.photo_4.url }}" alt="Photo 4">
+      </div>
+      {% endif %}
+      
+      <div class="slide-nav slide-prev" onclick="changeSlide(-1)">&lt;</div>
+      <div class="slide-nav slide-next" onclick="changeSlide(1)">&gt;</div>
+      <div class="slide-counter"><span id="currentSlideNum">1</span> / <span id="totalSlides">4</span></div>
+    </div>
 
 
 
@@ -315,13 +460,13 @@
               <label for="quota_require" class="col-form-label">
                 名額:
               </label>
-              <select class="form-control" id="service_quota" name="service_quota" onchange="totalFee()">
+              <select class="form-control" id="service_quota" name="service_quota" onchange="totalFee()" {% if has_remind is False %} readonly {% endif %}>
                 {% if has_remind %}
                 {% for i in quota_range %}
                 <option value={{ i }}>{{ i }}</option>
                 {% endfor %}
                 {% else %}
-                <span>Full</span>
+                <option>名額已滿</option>
                 {% endif %}
               </select>
               <br>
@@ -351,11 +496,19 @@
               />
             </div>
             <hr />
+            {% if has_remind %}
             <input
               type="submit"
               value="Send"
               class="btn btn-block btn-secondary"
             />
+            {% else %}
+            <input
+              type="disable"
+              value="名額已滿"
+              class="btn btn-block btn-secondary"
+            />
+            {% endif %}
           </form>
         </div>
       </div>
@@ -432,6 +585,7 @@
   </div>
 </div>
 
+<!-- Modal Script-->
 <script>
   let currentIndex = 0;
   const slides = document.querySelectorAll('.slide');
@@ -468,9 +622,9 @@
     }
   });
 
-  function openModal() {
+  {% comment %} function openModal() {
     document.getElementById("myModal").style.display = "block";
-  }
+  } {% endcomment %}
   
   function closeModal() {
     document.getElementById("myModal").style.display = "none";

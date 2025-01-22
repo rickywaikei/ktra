@@ -1,0 +1,62 @@
+[
+    {
+        "password": "pbkdf2_sha256$600000$UKyeEOZQQBXRGn2L99K9PA$aSYrCxJiU1BzU4oC8uJ03a/97vEUJxsWTJwSzxDv8ZY=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "anonymous",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-01-06T03:59:40.107838+00:00"
+    },
+    {
+        "password": "pbkdf2_sha256$600000$MvTxZFWZfifrDWZV4ECdgP$yGrs9vl7LgxpSyqfOQUNbPKw3/jwtcmVSdqFxff/I4I=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "kimchan",
+        "first_name": "Kim",
+        "last_name": "Chan",
+        "email": "kimchan@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-01-16T02:37:35+00:00"
+    },
+    {
+        "password": "pbkdf2_sha256$600000$ggE0AFhj5ys5kogz8lvspt$LdImgf8OY40LU97uZaM+F7mtAjb1QlzqnBJnVKFo6v8=",
+        "last_login": "2025-01-19T17:23:06.379074+00:00",
+        "is_superuser": true,
+        "username": "alexymleung",
+        "first_name": "Alex",
+        "last_name": "LEUNG",
+        "email": "alexymleung@hotmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-01-16T02:33:46+00:00"
+    },
+    {
+        "password": "pbkdf2_sha256$600000$m8sibuvIpboKzsVCCvFIG1$b0yy4oTp4SG2rkl/SB7U5hr5sx6XSAp9wc56vS93gvU=",
+        "last_login": "2025-01-20T13:24:29.811869+00:00",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@admincompany.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-01-06T03:58:35.719460+00:00"
+    },
+    {
+        "password": "pbkdf2_sha256$600000$2TGSy0xlI6r0TcMhmh6EwR$zNeQW4xfOrzliBlEDgjq4dFdkaIb7YScXEbf746afSA=",
+        "last_login": "2025-01-20T13:24:48.273031+00:00",
+        "is_superuser": true,
+        "username": "rickychan",
+        "first_name": "Chan",
+        "last_name": "Ricky",
+        "email": "rickychan@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-01-16T02:38:08+00:00"
+    }
+]
