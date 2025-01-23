@@ -27,11 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'ec2-54-79-214-217.ap-southeast-2.compute.amazonaws.com',
-    'ec2-3-27-71-24.ap-southeast-2.compute.amazonaws.com',
     'ktra.mooo.com',
     '192.168.195.11',
-    '192.168.195.10',
-    '192.168.195.52',
     '127.0.0.1',
     'localhost',
 ]
@@ -101,12 +98,7 @@ DATABASES = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://ktra.mooo.com',
-    'http://ec2-3-27-71-24.ap-southeast-2.compute.amazonaws.com',
-    'http://ec2-54-79-214-217.ap-southeast-2.compute.amazonaws.com',
 
-]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
