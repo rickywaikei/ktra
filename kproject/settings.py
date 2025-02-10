@@ -23,14 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-94)d@_47-t70%kax77^h4qx819_-$ww=9g2i0w$2o-%@j2cj+3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
+    '3.27.71.24','ec2-3-27-71-24.ap-southeast-2.compute.amazonaws.com',
     'ec2-54-79-214-217.ap-southeast-2.compute.amazonaws.com',
     'ktra.mooo.com',
-    '192.168.195.11',
-    '127.0.0.1',
-    'localhost',
+    '192.168.195.11','192.168.195.10','192.168.195.52',
+    '127.0.0.1','localhost',
 ]
 
 # Application definition
@@ -92,13 +92,18 @@ DATABASES = {
         'NAME': 'ktradb',
         'USER': 'postgres',
         'PASSWORD': '1234',
-        #'HOST': 'ec2-54-79-214-217.ap-southeast-2.compute.amazonaws.com',
+        #'HOST': 'ec2-3-27-71-24.ap-southeast-2.compute.amazonaws.com',
         'HOST':'localhost',
         'PORT': '5432'
     }
 }
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://ktra.mooo.com',
+    'http://ec2-3-27-71-24.ap-southeast-2.compute.amazonaws.com',
+    'http://ec2-54-79-214-217.ap-southeast-2.compute.amazonaws.com',
 
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -135,11 +140,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'kproject/static/')
 ]
 
+# Add this line to use the default file storage system for static files
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 
 # Default primary key field type
